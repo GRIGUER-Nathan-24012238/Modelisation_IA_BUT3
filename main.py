@@ -1,5 +1,5 @@
 import math
-import sympy as sp
+#import sympy as sp
 
 
 L=[[0,1,0,1,0,1,0,1,0,1],
@@ -34,6 +34,6 @@ def calcul_e(Z):
         somme_e+=((L_cible[i]-Z[i])**2)
     return somme_e
 
-
-print(calcul_Z(Z))
-print(calcul_e(Z))
+if __name__ == '__main__' :
+    print(calcul_Z(Z))
+    print(calcul_e(Z))
