@@ -19,9 +19,15 @@ def next_layer(A , W, B):
         for j in range(len(A)):
             z += A[j] * W[i][j]
         z += B[i]
-        z = (1+math.exp(-z))**-1
+        
+        z = sigmoid(z)
         Next_a.append(z)
     return Next_a
+
+
+def sigmoid(x):
+    sig = 1 / (1 + math.exp(-x))
+    return sig
 
 
 def next_layer_numpy(A , W, B):
@@ -38,5 +44,5 @@ def next_layer_numpy(A , W, B):
     """
 
     Next_a = np.dot(W, A) + B
-    Next_a = (1+np.exp(-Next_a))**-1
+    Next_a = sigmoid(Next_a)
     return Next_a

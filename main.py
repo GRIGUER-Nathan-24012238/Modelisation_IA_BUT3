@@ -2,30 +2,51 @@ import math
 #import sympy as sp
 
 
-L=[[0,1,0,1,0,1,0,1,0,1],
-   [0,0,1,0,1,1,1,0,0,0],
-   [0,1,0,0,1,0,0,0,0,1],
-   [1,1,1,1,0,0,0,1,0,0],
-   [0,1,0,1,0,1,0,0,1,1]]
+L = [[0,1,0,1,0,1,0,1,0],
+     [0,0,1,0,1,1,1,0,0],
+     [0,1,0,0,1,0,0,0,0],
+     [1,1,1,1,0,0,0,1,0],
+     [0,1,0,1,0,1,0,0,1]]
+
+#L_cible = [8, 4, 8, 7, 8]
+
+L_cible = [
+    [0,0,0,0,0,0,0,0,1],   # 8
+    [0,0,0,0,1,0,0,0,0],   # 4
+    [0,0,0,0,0,0,0,0,1],   # 8
+    [0,0,0,0,0,0,0,1,0],   # 7
+    [0,0,0,0,0,0,0,0,1],   # 8
+]
+
+W = [[0.5] * len(L[0]) for _ in range(len(L[0]))]
+B=[0]*len(L[0])
 
 
-L_cible = [5,
-           4,
-           3,
-           5,
-           5]
 
-W=[0.5]*len(L[0])
-Z=[]
+def next_layer_numpy(A , W, B):
+    """
+    Calculate the next layer of a neural network using numpy
+
+    Parameters:
+        A (numpy array): Input of the last layer
+        W (numpy array): Weights of the link
+        B (numpy array): Biases for the neurons
+
+    Returns:
+        numpy array: the values of the neurons for the layer
+    """
+
+    Next_a = np.dot(W, A) + B
+    Next_a = sigmoid(Next_a)
+    return Next_a
 
 
-def calcul_Z(Z):
-    for current_list_index in range(len(L)):
-        z=0
-        for i in range(len(L[current_list_index])):
-            z+=(L[current_list_index][i]*W[i])
-        Z.append(z)
-    return Z
+print("L :", L)
+print("W :", W)
+
+def sigmoid(x):
+    sig = 1 / (1 + math.exp(-x))
+    return sig
 
 
 def calcul_e(Z):
@@ -35,5 +56,5 @@ def calcul_e(Z):
     return somme_e
 
 if __name__ == '__main__' :
-    print(calcul_Z(Z))
-    print(calcul_e(Z))
+    #print(calcul_e(next_layer(L, W, B)))
+    pass
